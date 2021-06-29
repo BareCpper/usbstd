@@ -1,0 +1,63 @@
+#pragma once
+#include <cstdint>
+
+namespace usbstd
+{
+#pragma pack(push, 1)
+
+	enum
+	{
+		USB_GET_STATUS = 0,
+		USB_CLEAR_FEATURE = 1,
+		USB_SET_FEATURE = 3,
+		USB_SET_ADDRESS = 5,
+		USB_GET_DESCRIPTOR = 6,
+		USB_SET_DESCRIPTOR = 7,
+		USB_GET_CONFIGURATION = 8,
+		USB_SET_CONFIGURATION = 9,
+		USB_GET_INTERFACE = 10,
+		USB_SET_INTERFACE = 11,
+		USB_SYNCH_FRAME = 12,
+	};
+
+	enum
+	{
+		USB_STANDARD_REQUEST = 0,
+		USB_CLASS_REQUEST = 1,
+		USB_VENDOR_REQUEST = 2,
+	};
+
+	enum
+	{
+		USB_OUT_TRANSFER = 0,
+		USB_IN_TRANSFER = 1,
+	};
+
+	enum
+	{
+		USB_IN_ENDPOINT = 0x80,
+		USB_OUT_ENDPOINT = 0x00,
+		USB_INDEX_MASK = 0x7f,
+		USB_DIRECTION_MASK = 0x80,
+	};
+
+	enum
+	{
+		USB_CONTROL_ENDPOINT = 0 << 0,
+		USB_ISOCHRONOUS_ENDPOINT = 1 << 0,
+		USB_BULK_ENDPOINT = 2 << 0,
+		USB_INTERRUPT_ENDPOINT = 3 << 0,
+
+		USB_NO_SYNCHRONIZATION = 0 << 2,
+		USB_ASYNCHRONOUS = 1 << 2,
+		USB_ADAPTIVE = 2 << 2,
+		USB_SYNCHRONOUS = 3 << 2,
+
+		USB_DATA_ENDPOINT = 0 << 4,
+		USB_FEEDBACK_ENDPOINT = 1 << 4,
+		USB_IMP_FB_DATA_ENDPOINT = 2 << 4,
+	};
+	
+
+#pragma pack(pop)
+} //END: usbstd
