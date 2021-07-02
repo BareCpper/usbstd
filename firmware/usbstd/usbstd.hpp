@@ -57,7 +57,6 @@ namespace usbstd
 		USB_FEEDBACK_ENDPOINT = 1 << 4,
 		USB_IMP_FB_DATA_ENDPOINT = 2 << 4,
 	};
-	
 
 #pragma pack(pop)
 } //END: usbstd
