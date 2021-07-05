@@ -12,5 +12,5 @@ target_sources(usbstd
     PRIVATE 
         "usbstd.cpp"
     PUBLIC 
-        "usbstd.hpp" "usb_bos.hpp"  "usb_descriptor.hpp" "usb_cdc.hpp" "usb_request.hpp" )
+        "usbstd.hpp" "usb_bos.hpp"  "usb_descriptor.hpp" "usb_cdc.hpp" "usb_request.hpp"  "usb_class.hpp")
         

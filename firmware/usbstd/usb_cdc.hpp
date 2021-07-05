@@ -1,11 +1,14 @@
 #pragma once
 #include <cstdint>
 
+#include "usb_class.hpp"
 #include "usb_request.hpp"
+#include "usb_descriptor.hpp"
 
 namespace usbstd
 {
 #pragma pack(push, 1)
+
 
 	enum
 	{
@@ -85,13 +88,6 @@ namespace usbstd
 		USB_CDC_ATM_SUBCLASS = 7, // ATM Networking Control Model
 	};
 
-	enum
-	{
-		USB_CDC_HEADER_SUBTYPE = 0, // Header Functional Descriptor
-		USB_CDC_CALL_MGMT_SUBTYPE = 1, // Call Management
-		USB_CDC_ACM_SUBTYPE = 2, // Abstract Control Management
-		USB_CDC_UNION_SUBTYPE = 6, // Union Functional Descriptor
-	};
 
 	// USB CDC Call Management Capabilities
 	enum CdcCallManagmentCapabilities
@@ -126,39 +122,49 @@ namespace usbstd
 		Overrun = (1 << 6),
 	};
 
-	struct usb_cdc_header_functional_descriptor_t
+	enum class CdcDescriptorSubType : uint8_t
 	{
-		uint8_t   bFunctionalLength;
-		uint8_t   bDescriptorType;
-		uint8_t   bDescriptorSubtype;
+		Header = 0, // Header Functional Descriptor
+		CallManagement = 1, // Call Management
+		Acm = 2, // Abstract Control Management
+		Union = 6, // Union Functional Descriptor
+
+		/// @todo TinyUsb cdc_func_desc_type_t for full list?
+	};
+
+	template<>
+	struct SubTypeDescriptorData<DescriptorType::CsInterface, CdcDescriptorSubType::Header>
+	{
 		uint16_t  bcdCDC;
-	} ;
+	};
 
-	struct usb_cdc_abstract_control_managment_descriptor_t
+	template<>
+	struct SubTypeDescriptorData<DescriptorType::CsInterface, CdcDescriptorSubType::Acm>
 	{
-		uint8_t   bFunctionalLength;
-		uint8_t   bDescriptorType;
-		uint8_t   bDescriptorSubtype;
 		uint8_t   bmCapabilities;
-	} ;
+	};
 
-	struct usb_cdc_call_managment_functional_descriptor_t
+	template<>
+	struct SubTypeDescriptorData<DescriptorType::CsInterface, CdcDescriptorSubType::CallManagement>
 	{
-		uint8_t   bFunctionalLength;
-		uint8_t   bDescriptorType;
-		uint8_t   bDescriptorSubtype;
 		uint8_t   bmCapabilities;
 		uint8_t   bDataInterface;
-	} ;
+	};
 
-	struct usb_cdc_union_functional_descriptor_t
+	template<>
+	struct SubTypeDescriptorData<DescriptorType::CsInterface, CdcDescriptorSubType::Union>
 	{
-		uint8_t   bFunctionalLength;
-		uint8_t   bDescriptorType;
-		uint8_t   bDescriptorSubtype;
 		uint8_t   bMasterInterface;
 		uint8_t   bSlaveInterface0;
-	} ;
+	};
+
+	namespace cdc
+	{
+		using HeaderDescriptor = CsInterfaceDescriptor<CdcDescriptorSubType::Header>;
+		using CallDescriptor = CsInterfaceDescriptor<CdcDescriptorSubType::CallManagement>;
+		using AcmDescriptor = CsInterfaceDescriptor<CdcDescriptorSubType::Acm>;
+		using UnionDescriptor = CsInterfaceDescriptor<CdcDescriptorSubType::Union>;
+	} //< END: cdc
 
 	struct usb_cdc_line_coding_t
 	{
