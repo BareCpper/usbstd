@@ -64,7 +64,7 @@ namespace usbstd
 	struct SubTypeDescriptor
 	{
 		DescriptorHeader header = { sizeof(SubTypeDescriptor), Type };
-		uint8_t bDescriptorSubType = { ClassSubType }; ///< Descriptor SubType
+		uint8_t bDescriptorSubType = static_cast<uint8_t>(ClassSubType); ///< Descriptor SubType
 		DescriptorData_t data;
 	};
 
