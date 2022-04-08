@@ -77,17 +77,31 @@ namespace usbstd
 		USB_CDC_DATA_CLASS = 10, // CDC Data Class Interface
 	};
 
-	enum
+	enum class CdcSubClass
 	{
-		USB_CDC_DLCM_SUBCLASS = 1, // Direct Line Control Model
-		USB_CDC_ACM_SUBCLASS = 2, // Abstract Control Model
-		USB_CDC_TCM_SUBCLASS = 3, // Telephone Control Model
-		USB_CDC_MCCM_SUBCLASS = 4, // Multi-Channel Control Model
-		USB_CDC_CCM_SUBCLASS = 5, // CAPI Control Model
-		USB_CDC_ETH_SUBCLASS = 6, // Ethernet Networking Control Model
-		USB_CDC_ATM_SUBCLASS = 7, // ATM Networking Control Model
+		None = 0, // No Subclass
+		Dlcm = 1, // Direct Line Control Model
+		Acm = 2, // Abstract Control Model
+		Tcm = 3, // Telephone Control Model
+		Mccm = 4, // Multi-Channel Control Model
+		Ccm = 5, // CAPI Control Model
+		Eth = 6, // Ethernet Networking Control Model
+		Atm = 7, // ATM Networking Control Model
 	};
-
+	
+	enum class CdcProtocol
+	{
+		None = 0x00, ///< No specific protocol
+		At_Itu = 0x01, ///< AT Commands: V.250 etc
+		At_Pcca101 = 0x02, ///< AT Commands defined by PCCA-101
+		At_Pcca101_A = 0x03, ///< AT Commands defined by PCCA-101 & Annex O
+		At_Gsm = 0x04, ///< AT Commands defined by GSM 07.07
+		At_3gpp = 0x05, ///< AT Commands defined by 3GPP 27.007
+		At_Cs = 0x06, ///< AT Commands defined by TIA for CDMA
+		Eem = 0x07,   ///< Ethernet Emulation Model
+		Ext = 0xFE,   ///< External protocol
+		Vendor = 0xFF   ///< Vendor-specific
+	};
 
 	// USB CDC Call Management Capabilities
 	enum CdcCallManagmentCapabilities
