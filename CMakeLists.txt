@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 3.18)
 
-include(GitVersion)
-project ("usbstd"
-  VERSION ${PROJECT_SEMANTICVERSION} )
+project ("usbstd")
   
 add_library(usbstd)
 target_compile_features( usbstd PUBLIC cxx_std_17 )
